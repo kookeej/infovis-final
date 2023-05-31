@@ -57,18 +57,23 @@ class BubbleChart {
     
       const histogramData = this.data.filter((d) => d.occupation === occupation)[0];
     
+
       const genreCounts = Object.entries(histogramData)
-        .filter(
-          ([key]) =>
-            key !== "occupation" &&
-            key !== "male" &&
-            key !== "female" &&
-            key !== "total"
-        )
-        .map(([genre, count]) => ({
-          genre: genre,
-          count: +count,
-        }));
+      .filter(
+        ([key]) =>
+          key !== "occupation" &&
+          key !== "male" &&
+          key !== "female" &&
+          key !== "total"
+      )
+      .map(([genre, count]) => ({
+        genre: genre,
+        count: +count,
+      }));
+
+      genreCounts.sort((a, b) => b.count - a.count);
+      const topGenres = genreCounts.slice(0, 3).map((d) => d.genre);
+
     
       const histogramMargin = { top: 100, right: 100, bottom: 80, left: 80 };
       const histogramWidth = 600 - histogramMargin.left - histogramMargin.right;
@@ -119,20 +124,20 @@ class BubbleChart {
       };
     
       histogramSvg
-        .selectAll("rect.bar")
-        .data(genreCounts)
-        .join("rect")
-        .attr("class", "bar")
-        .attr("x", (d) => xScale(d.genre))
-        .attr("y", (d) => yScale(d.count))
-        .attr("width", xScale.bandwidth())
-        .attr("height", (d) => histogramHeight - yScale(d.count))
-        .attr("fill", "#0072BC")
-        .on("mouseover", mousemove)
-        .on("mousemove", mousemove)
-        .on("mouseleave", () => {
-          tooltip.style("opacity", 0);
-        });
+      .selectAll("rect.bar")
+      .data(genreCounts)
+      .join("rect")
+      .attr("class", "bar")
+      .attr("x", (d) => xScale(d.genre))
+      .attr("y", (d) => yScale(d.count))
+      .attr("width", xScale.bandwidth())
+      .attr("height", (d) => histogramHeight - yScale(d.count))
+      .attr("fill", (d) => (topGenres.includes(d.genre) ? "red" : "#0072BC"))
+      .on("mouseover", mousemove)
+      .on("mousemove", mousemove)
+      .on("mouseleave", () => {
+        tooltip.style("opacity", 0);
+      });
     
       const xAxis = d3.axisBottom(xScale).tickFormat((d) => {
         return d.split("-").join(" ");

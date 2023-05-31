@@ -13,243 +13,100 @@
 
     <title>My MovieLens 100K</title>
     <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            align-items: left;
+        }
 
-    .container {
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+        .row {
+            display: flex;
+            justify-content: left;
+            align-items: left;
+        }
 
-    .row {
-        display: flex;
-        justify-content: center;
-        align-items: stretch;
-        height: 100%;
-    }
+        .col-md-6 {
+            flex-basis: 50%;
+            max-width: 100%;
+        }
 
-    .col-md-4 {
-        flex-basis: 33.33%;
-        max-width: 33.33%;
-    }
+        .visualization {
+            box-sizing: border-box;
+            padding: 5px;
+        }
 
-    .visualization {
-        height: 100%;
-        box-sizing: border-box;
-        padding: 10px;
-    }
+        .chart-container {
+            height: 100%;
+        }
 
-    .chart-container {
-        height: 100%;
-    }
+        .chart {
+            display: flex;
+            align-items: left;
+            justify-content: left;
+            height: 100%;
+        }
 
-    .chart {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-    }
+        .chart svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
 
-    .chart svg {
-        width: 100%;
-        height: 100%;
-        overflow: visible;
-    }
-    .tooltip {
-        background-color: #ffffff;
-        font-family: lato;
-        font-size: 11px;
-        padding: 6px;
-        color: #333333;
-        border: none;
-        box-shadow: 0px 0px 3px 0px #E6E6E6;
-    }
+        .tooltip {
+            background-color: #ffffff;
+            font-family: lato;
+            font-size: 11px;
+            padding: 6px;
+            color: #333333;
+            border: none;
+            box-shadow: 0px 0px 3px 0px #E6E6E6;
+        }
 
-    text {
-        font-family: lato;
-        font-size: 10px;
-        fill: #333333;
-    }
+        text {
+            font-family: lato;
+            font-size: 10px;
+            fill: #333333;
+        }
 
-    .grid path {
-        stroke-width: 0;
-        stroke: #656262;
-    }
+        .grid path {
+            stroke-width: 0;
+            stroke: #656262;
+        }
 
-    .grid .tick line {
-        stroke: #656262;
-        stroke-width: 0.3px;
-        stroke-opacity: 0.3;
-    }
+        .grid .tick line {
+            stroke: #656262;
+            stroke-width: 0.3px;
+            stroke-opacity: 0.3;
+        }
 
-    text.chart-title {
-        font-size: 14px;
-        font-weight: bold;
-        fill: #222222;
-    }
+        text.chart-title {
+            font-size: 14px;
+            font-weight: bold;
+            fill: #222222;
+        }
 
-    text.chart-label {
-        font-size: 10px;
-        font-weight: 400;
-        fill: #999999;
-    }
+        text.chart-label {
+            font-size: 10px;
+            font-weight: 400;
+            fill: #999999;
+        }
 
-    .legend {
-        font-size: 10px;
-    }
-    body {
-        background: #eee;
-        overflow-y: scroll;
-    }
+        .legend {
+            font-size: 10px;
+        }
 
-    .chart-container {
-        display: flex;
-        justify-content: space-between;
-        width: 800px; /* Set the desired width */
-        height: 400px; /* Set the desired height */
-        margin: 0 auto; /* Center the container horizontally */
-        font-size: 12px; /* Set the desired font size */
-    }
-    .navbar-brand {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Times New Roman", Times, serif;
-}
-    /* .chart {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 50%;
-    } */
+        body {
+            background: #eee;
+            overflow-y: scroll;
+        }
 
-    /* .chart svg {
-        overflow: visible;
-        width: 100%;
-        height: 100%;
-    } */
-
-/* body {
-    background: #eee;
-    overflow-y: scroll;
-}
-
-.container {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.row {
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-    height: 100%;
-}
-
-.col-md-4 {
-    flex-basis: 33.33%;
-    max-width: 33.33%;
-}
-
-.visualization {
-    height: 100%;
-    box-sizing: border-box;
-    padding: 10px;
-}
-
-svg {
-    width: 100%;
-    height: 100%;
-}
-
-.tooltip {
-    background-color: #ffffff;
-    font-family: lato;
-    font-size: 11px;
-    padding: 6px;
-    color: #333333;
-    border: none;
-    box-shadow: 0px 0px 3px 0px #E6E6E6;
-}
-
-text {
-    font-family: lato;
-    font-size: 10px;
-    fill: #333333;
-}
-
-.grid path {
-    stroke-width: 0;
-    stroke: #656262;
-}
-
-.grid .tick line {
-    stroke: #656262;
-    stroke-width: 0.3px;
-    stroke-opacity: 0.3;
-}
-
-text.chart-title {
-    font-size: 14px;
-    font-weight: bold;
-    fill: #222222;
-}
-
-text.chart-label {
-    font-size: 10px;
-    font-weight: 400;
-    fill: #999999;
-}
-
-.legend {
-    font-size: 10px;
-}
-
-.chart-container {
-    display: flex;
-    justify-content: space-between;
-    width: 100vw;
-    height: 100vh;
-}
-
-.chart {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 50%;
-}
-
-.chart svg {
-    overflow: visible;
-    width: 100%;
-    height: 100%;
-}
-
-@media (max-width: 768px) {
-    .chart-container {
-        flex-direction: column;
-        height: auto;
-    }
-
-    .chart {
-        width: 100%;
-    }
-
-    .bubble-chart,
-    .histogram-chart {
-        height: 50vh;
-    }
-} */
-
-        
+        .navbar-brand {
+            display: flex;
+            justify-content: left;
+            align-items: left;
+            font-family: "Times New Roman", Times, serif;
+        }
     </style>
 </head>
 
@@ -263,27 +120,32 @@ text.chart-label {
     </header>
 
     <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div id="streamgraph_container" class="visualization"></div>
+        <!-- <div class="row"> -->
+            <div class="col-md-6">
+                <div id="scatterplot_container" class="visualization"></div>
+                
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
+                <div id="histogram_container2" class="visualization"></div>
+            </div>
+        <!-- </div> -->
+        <div class="row">
+            <div class="col-md-6">
                 <div id="bubblechart_container" class="visualization"></div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div id="histogram_container" class="visualization"></div>
             </div>
         </div>
     </div>
     
-
-    <script src="components/streamgraph.js"></script>
     <script src="components/bubblechart.js"></script>
     <script src="components/histogram.js"></script>
+    <script src="components/scatterplot.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
